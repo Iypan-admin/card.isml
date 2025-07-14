@@ -1,5 +1,5 @@
 {
-  "name": "card.isml",
+  "name": "card-isml",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,15 +17,12 @@
     "serve": "^14.2.4",
     "web-vitals": "^2.1.4"
   },
-  "devDependencies": {
-    "gh-pages": "^6.3.0"
+  "scripts": {
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
- "scripts": {
-  "start": "serve -s build",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-},
   "eslintConfig": {
     "extends": [
       "react-app",
