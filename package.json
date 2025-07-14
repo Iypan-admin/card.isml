@@ -1,8 +1,8 @@
 {
-  "name": "isml-elite-card",
+  "name": "card.isml",
   "version": "0.1.0",
   "private": true,
-"homepage": "https://Iypan-admin.github.io/card.isml",
+  "homepage": "https://Iypan-admin.github.io/card.isml",
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.11",
     "@testing-library/dom": "^10.4.0",
