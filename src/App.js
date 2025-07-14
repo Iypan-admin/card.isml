@@ -7,7 +7,7 @@ import TermsAndConditions from './components/LandingPage/TermsAndConditions';
 
 function App() {
   return (
-    <Router basename="/isml-elite-card">
+    <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
