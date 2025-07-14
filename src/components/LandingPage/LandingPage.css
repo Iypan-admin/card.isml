@@ -24,13 +24,13 @@
 }
 
 .hero-logo {
-  width: 150px;
-  height: 150px;
-  border-radius: 10%;
-  object-fit: cover;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit:contain;
   background: white;
   padding: 24px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
 }
 
 .hero-text-box {
@@ -55,19 +55,36 @@
   background: #f0f9ff;
 }
 
+/* === PLAN CARD GRID === */
 .plan-card-grid {
   display: flex;
-  flex-direction: column;
   gap: 1.5rem;
-  align-items: center;
+  align-items: stretch;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
 }
 
+.plan-card-grid::-webkit-scrollbar {
+  height: 6px;
+}
+.plan-card-grid::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+.plan-card-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Desktop View */
 @media (min-width: 768px) {
   .plan-card-grid {
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    flex-wrap: wrap;
-    align-items: stretch;
+    overflow: visible;
+    scroll-snap-type: none;
   }
 }
 
@@ -86,6 +103,8 @@
   border: 2px solid transparent;
   min-height: 540px;
   box-sizing: border-box;
+  scroll-snap-align: center;
+  flex-shrink: 0;
 }
 
 .plan-card .plan-content {
@@ -238,7 +257,7 @@
   100% {transform: translate(-50%, -50%) scale(1.05); opacity: 0.85;}
 }
 
-/* ================= MEDIA QUERIES ================= */
+/* ================= HERO MEDIA ================= */
 @media (min-width: 768px) {
   .hero-flex {
     flex-direction: row;
@@ -316,4 +335,62 @@
   padding: 2.5rem 1rem;
   background: #fff;
   text-align: center;
+}
+
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  position: relative;
+}
+
+.carousel-button {
+  background-color: #ffffff;
+  color: #333;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-button:hover {
+  background-color: #f3f4f6;
+  border-color: #888;
+}
+
+.carousel-content {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 0.5rem;
+  gap: 1.2rem;
+  scrollbar-width: none; /* Firefox */
+}
+
+.carousel-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+@media (min-width: 768px) {
+  .carousel-button {
+    width: 48px;
+    height: 48px;
+    font-size: 1.8rem;
+  }
+}
+
+
+/* Hide arrows on desktop */
+@media (min-width: 768px) {
+  .carousel-arrow {
+    display: none;
+  }
 }

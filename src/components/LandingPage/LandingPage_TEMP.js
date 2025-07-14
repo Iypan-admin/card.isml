@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import logo from "../../assets/logo.png";
 import card1 from "../../assets/ISML-Card1.png";
@@ -63,6 +63,7 @@ const plans = [
 
 const LandingPage = () => {
   const [rotations, setRotations] = useState(plans.map(() => 0));
+  const scrollRef = useRef(null);
 
   const handleRedirect = (url) => {
     window.open(url, "_blank");
@@ -74,6 +75,20 @@ const LandingPage = () => {
       updated[index] += 360;
       return updated;
     });
+  };
+
+  const scrollAmount = 340;
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
   };
 
   return (
@@ -104,65 +119,75 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Plan Cards Section */}
+      {/* Plan Cards Section with Arrows */}
       <section className="plans-section">
-        <div className="plan-card-grid">
-          {plans.map((plan, index) => (
-            <motion.div
-              key={index}
-              className={`plan-card card-hover-${plan.color} ${
-                plan.highlight ? "highlight-card" : ""
-              }`}
-              onMouseEnter={() => handleHover(index)}
-            >
-              {plan.highlight && (
-                <div className="popular-badge">★ Most ★ Popular</div>
-              )}
+        <div className="carousel-wrapper">
+          <button className="carousel-arrow left" onClick={scrollLeft}>
+            &#10094;
+          </button>
 
+          <div className="plan-card-grid" ref={scrollRef}>
+            {plans.map((plan, index) => (
               <motion.div
-                animate={{ rotateY: rotations[index] }}
-                transition={{ duration: 1.9, ease: "easeInOut" }}
-                style={{
-                  perspective: 1000,
-                  transformStyle: "preserve-3d",
-                }}
+                key={index}
+                className={`plan-card card-hover-${plan.color} ${
+                  plan.highlight ? "highlight-card" : ""
+                }`}
+                onMouseEnter={() => handleHover(index)}
               >
-                <img
-                  src={plan.image}
-                  alt={plan.title}
-                  className="card-image"
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                    borderRadius: "14px",
-                    marginBottom: "1rem",
-                    objectFit: "cover",
-                    willChange: "transform",
-                    backfaceVisibility: "hidden",
-                  }}
-                />
-              </motion.div>
+                {plan.highlight && (
+                  <div className="popular-badge">★ Most ★ Popular</div>
+                )}
 
-              <div className="plan-content">
-                <div className="plan-header-fixed">
-                  <h2>{plan.price}</h2>
-                  <h3>{plan.title}</h3>
-                  <p className="original-price">Original: {plan.original}</p>
+                <motion.div
+                  animate={{ rotateY: rotations[index] }}
+                  transition={{ duration: 1.9, ease: "easeInOut" }}
+                  style={{
+                    perspective: 1000,
+                    transformStyle: "preserve-3d",
+                  }}
+                >
+                  <img
+                    src={plan.image}
+                    alt={plan.title}
+                    className="card-image"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      borderRadius: "14px",
+                      marginBottom: "1rem",
+                      objectFit: "cover",
+                      willChange: "transform",
+                      backfaceVisibility: "hidden",
+                    }}
+                  />
+                </motion.div>
+
+                <div className="plan-content">
+                  <div className="plan-header-fixed">
+                    <h2>{plan.price}</h2>
+                    <h3>{plan.title}</h3>
+                    <p className="original-price">Original: {plan.original}</p>
+                  </div>
+                  <ul>
+                    {plan.features.map((feature, i) => (
+                      <li key={i}>✔️ {feature}</li>
+                    ))}
+                  </ul>
                 </div>
-                <ul>
-                  {plan.features.map((feature, i) => (
-                    <li key={i}>✔️ {feature}</li>
-                  ))}
-                </ul>
-              </div>
-              <button
-                className="plan-button"
-                onClick={() => handleRedirect(plan.link)}
-              >
-                {plan.button}
-              </button>
-            </motion.div>
-          ))}
+                <button
+                  className="plan-button"
+                  onClick={() => handleRedirect(plan.link)}
+                >
+                  {plan.button}
+                </button>
+              </motion.div>
+            ))}
+          </div>
+
+          <button className="carousel-arrow right" onClick={scrollRight}>
+            &#10095;
+          </button>
         </div>
       </section>
 
