@@ -206,7 +206,9 @@ const LandingPage = () => {
           <Link to="/terms-and-conditions">Terms & Conditions</Link>
           <Link to="/privacy-policy">Privacy Policy</Link>
         </div>
-        <p>© {new Date().getFullYear()} ISML. All rights reserved.</p>
+        <p style={{ textAlign: 'center' }}>
+          © {new Date().getFullYear()} ISML. All rights reserved.
+        </p>
       </footer>
     </div>
   );
