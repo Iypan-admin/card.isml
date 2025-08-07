@@ -1,47 +1,109 @@
+/* AccordionFAQ.css */
+
+.faq-wrapper {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: "Inter", sans-serif;
+}
+
 .accordion {
-  max-width: 700px;
-  margin: 0 auto;
-  border-radius: 10px;
-  background-color: #ffffff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .accordion-item {
-  border-bottom: 1px solid #e2e8f0;
-  padding: 1rem 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease;
+}
+
+.accordion-item:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
 }
 
 .accordion-trigger {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  background: none;
-  border: none;
+  all: unset;
   cursor: pointer;
   width: 100%;
-  padding: 0.8rem 1rem;
-  font-size: 1.1rem;
-  transition: background 0.2s ease;
-  color: #1e293b;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  transition: background-color 0.2s;
 }
 
 .accordion-trigger:hover {
-  background-color: #f1f5f9;
+  background-color: #f9fafb;
 }
 
-.accordion-trigger svg {
-  transition: transform 0.3s ease;
+/* + / - icon style */
+.plus-minus {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+
+.plus-minus .horizontal,
+.plus-minus .vertical {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #4b5563;
+  transform: translateY(-50%);
+  transition: opacity 0.2s ease;
+}
+
+.plus-minus .vertical {
+  transform: rotate(90deg);
+}
+
+[data-state="open"] .plus-minus .vertical {
+  opacity: 0;
 }
 
 .accordion-content {
-  padding: 0 1rem 0.8rem;
-  font-size: 1.02rem;
-  color: #334155;
+  padding: 0 1.25rem 1rem;
+  color: #374151;
+  font-size: 0.95rem;
   line-height: 1.6;
+  animation: fadeIn 0.3s ease;
 }
 
-.accordion-item[data-state='open'] .accordion-trigger svg {
-  transform: rotate(180deg);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .faq-wrapper {
+    padding: 1rem 0.75rem;
+  }
+
+  .accordion-trigger {
+    font-size: 0.95rem;
+  }
+
+  .accordion-content {
+    font-size: 0.9rem;
+  }
 }
